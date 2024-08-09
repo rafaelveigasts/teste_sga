@@ -13,7 +13,6 @@ export class PrismaTutorialsRepository implements TutorialsRepository {
     date?: Date,
     title?: string,
   ): Promise<Tutorials[] | null> {
-    console.log(page, quantity, date, title)
     const tutorials = await this.prisma.tutorial.findMany({
       skip: page,
       take: quantity,

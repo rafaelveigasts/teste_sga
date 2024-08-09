@@ -20,7 +20,7 @@ import { validationExceptionExample } from '@/infra/utils/swagger-annotations'
 import { ListTutorialsResponse } from '../dtos/list-tutorials-response'
 import { ListTutorialsUseCase } from '../use-cases/list-tutorials'
 import { ListTutorialsParamsQuerySchema } from '../dtos/list-tutorials-params-query-Schema'
-import { CacheInterceptor } from '@nestjs/cache-manager'
+import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager'
 
 @UseInterceptors(CacheInterceptor)
 @Controller('/tutorials')
@@ -30,6 +30,7 @@ export class ListTutorialsController {
   constructor(private readonly listTutorialsUseCase: ListTutorialsUseCase) {}
 
   @Get()
+  @CacheKey('tutorials')
   @ApiOperation({ summary: 'Listar tutoriais' })
   @ApiOkResponse({ type: ListTutorialsResponse, isArray: true })
   @TemplatedApiException(() => [
@@ -41,8 +42,6 @@ export class ListTutorialsController {
   async handle(
     @Query() query: ListTutorialsParamsQuerySchema,
   ): Promise<ListTutorialsResponse[]> {
-    console.log('query', query)
-
     const tutorials = await this.listTutorialsUseCase.execute({
       page: query.page,
       quantity: query.quantity,

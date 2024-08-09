@@ -11,8 +11,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(envService: EnvService) {
     const publicKey = envService.get('JWT_PUBLIC_KEY')
 
-    console.log(publicKey)
-
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       algorithms: ['HS256'],

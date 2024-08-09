@@ -48,9 +48,6 @@ export class ListTutorialsUseCase {
       return right(tutorialsOnDb)
     }
 
-    console.log('from cache')
-    console.log(tutorials)
-
     return right<TutorialsNotFoundError, Tutorials[]>(tutorials as Tutorials[])
   }
 }

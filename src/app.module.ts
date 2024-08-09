@@ -15,7 +15,7 @@ import { HttpExceptionFilter } from './infra/http/filters/http-exception'
 import { APP_PIPE, APP_INTERCEPTOR, Reflector, APP_FILTER } from '@nestjs/core'
 import { ValidationRequestException } from './core/errors/validation-request-exception'
 import { TutorialsModule } from './domain/tutorials/tutorials.module'
-import { CacheModule } from '@nestjs/cache-manager'
+import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager'
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -61,6 +61,10 @@ import { CacheModule } from '@nestjs/cache-manager'
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CacheInterceptor,
     },
   ],
 })
