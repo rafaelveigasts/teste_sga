@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    image: test_nest_sga
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: teste_nest_sga
+    env_file:
+      - ./.env
+    environment:
+      - NODE_ENV=development
+    ports:
+      - '3333:3333'
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    container_name: teste_nest_sga_db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=test_nest_sga
+    ports:
+      - '5432:5432'
+    depends_on:
+      - redis
+  redis:
+    image: redis
+    container_name: teste_nest_sga_redis
+    restart: unless-stopped
+    ports:
+      - '6378:6379'
