@@ -15,10 +15,15 @@ import { HttpExceptionFilter } from './infra/http/filters/http-exception'
 import { APP_PIPE, APP_INTERCEPTOR, Reflector, APP_FILTER } from '@nestjs/core'
 import { ValidationRequestException } from './core/errors/validation-request-exception'
 import { TutorialsModule } from './domain/tutorials/tutorials.module'
+import { CacheModule } from '@nestjs/cache-manager'
 @Module({
   imports: [
     ConfigModule.forRoot(),
     LoggerModule.forRoot(pinoConfig),
+    CacheModule.register({
+      isGlobal: true,
+      ttl: 60,
+    }),
     EnvModule,
     DatabaseModule,
     UsersModule,

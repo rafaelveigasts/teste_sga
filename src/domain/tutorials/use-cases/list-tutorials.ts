@@ -1,9 +1,11 @@
-import { Injectable } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 
 import { Either, left, right } from '@/core/either'
 import { TutorialsRepository } from '../repositories/tutorials-repository'
 import { TutorialsNotFoundError } from './errors/tutorials-not-found'
 import { Tutorials } from '../entities/tutorials'
+import { CACHE_MANAGER } from '@nestjs/cache-manager'
+import { Cache } from 'cache-manager'
 
 type ListTutorialsUseCaseResponse = Either<TutorialsNotFoundError, Tutorials[]>
 
@@ -16,7 +18,10 @@ type ListTutorialsUseCaseParams = {
 
 @Injectable()
 export class ListTutorialsUseCase {
-  constructor(private readonly tutorialsRepository: TutorialsRepository) {}
+  constructor(
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    private readonly tutorialsRepository: TutorialsRepository,
+  ) {}
 
   async execute({
     page,
@@ -24,17 +29,28 @@ export class ListTutorialsUseCase {
     date,
     title,
   }: ListTutorialsUseCaseParams): Promise<ListTutorialsUseCaseResponse> {
-    const tutorials = await this.tutorialsRepository.list(
-      page,
-      quantity,
-      date,
-      title,
-    )
+    const tutorials = await this.cacheManager.get('tutorials')
 
     if (!tutorials) {
-      return left(new TutorialsNotFoundError())
+      const tutorialsOnDb = await this.tutorialsRepository.list(
+        page,
+        quantity,
+        date,
+        title,
+      )
+
+      if (!tutorialsOnDb) {
+        return left(new TutorialsNotFoundError())
+      }
+
+      await this.cacheManager.set('tutorials', tutorialsOnDb)
+
+      return right(tutorialsOnDb)
     }
 
-    return right(tutorials)
+    console.log('from cache')
+    console.log(tutorials)
+
+    return right<TutorialsNotFoundError, Tutorials[]>(tutorials as Tutorials[])
   }
 }

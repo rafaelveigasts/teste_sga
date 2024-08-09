@@ -20,7 +20,9 @@ import { validationExceptionExample } from '@/infra/utils/swagger-annotations'
 import { ListTutorialsResponse } from '../dtos/list-tutorials-response'
 import { ListTutorialsUseCase } from '../use-cases/list-tutorials'
 import { ListTutorialsParamsQuerySchema } from '../dtos/list-tutorials-params-query-Schema'
+import { CacheInterceptor } from '@nestjs/cache-manager'
 
+@UseInterceptors(CacheInterceptor)
 @Controller('/tutorials')
 @ApiTags('tutorials')
 @ApiBearerAuth()
