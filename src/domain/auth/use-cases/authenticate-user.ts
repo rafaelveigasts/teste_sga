@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 
-import { Either, left, right } from '@/core/either'
+import { Either, right } from '@/core/either'
 import { UserRepository } from '@/domain/users/repositories/user-repository'
 import { WrongCredentialsError } from './erros/wrong-credentials-error'
 import { UserPayload } from '../dtos/user-payload'
