@@ -1,6 +1,6 @@
 export type Tutorials = {
-  id: string
+  id?: string
   title: string
-  createdAt: Date
-  updatedAt: Date
+  createdAt?: Date
+  updatedAt?: Date
 }
