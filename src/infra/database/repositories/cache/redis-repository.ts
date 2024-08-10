@@ -1,7 +1,7 @@
 import { Tutorials } from '@/domain/tutorials/entities/tutorials'
 import { RedisService } from '@/infra/config/redis/redis'
 import { Injectable, Logger } from '@nestjs/common'
-import { PrismaService } from '../../prisma/prisma.service'
+
 import { TutorialsRepository } from '@/domain/tutorials/repositories/tutorials-repository'
 
 @Injectable()

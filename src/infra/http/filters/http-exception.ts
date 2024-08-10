@@ -1,4 +1,9 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common'
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpException,
+} from '@nestjs/common'
 
 interface ExceptionMessage {
   message: string
@@ -26,7 +31,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
       const parseMessage = exceptionResponse.message as string
 
       try {
-        const parsedExceptionMessage: ExceptionMessage = JSON.parse(parseMessage)
+        const parsedExceptionMessage: ExceptionMessage =
+          JSON.parse(parseMessage)
         method = parsedExceptionMessage.method
         message = parsedExceptionMessage.message
       } catch {
