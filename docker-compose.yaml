@@ -32,4 +32,4 @@ services:
     container_name: teste_nest_sga_redis
     restart: unless-stopped
     ports:
-      - '6378:6379'
+      - '6378:6378'
