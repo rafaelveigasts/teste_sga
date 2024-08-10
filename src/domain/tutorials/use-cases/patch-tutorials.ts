@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 
-import { Either, left, right } from '@/core/either'
+import { Either, left, right } from '../../../core/either'
 import { TutorialsRepository } from '../repositories/tutorials-repository'
 import { TutorialsNotFoundError } from './errors/tutorials-not-found'
 import { Tutorials } from '../entities/tutorials'
