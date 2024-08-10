@@ -13,9 +13,9 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger'
-import { TemplatedApiException } from '@/core/decorators/templated-api-exception'
-import { ValidationRequestException } from '@/core/errors/validation-request-exception'
-import { validationExceptionExample } from '@/infra/utils/swagger-annotations'
+import { TemplatedApiException } from '../../../core/decorators/templated-api-exception'
+import { ValidationRequestException } from '../../../core/errors/validation-request-exception'
+import { validationExceptionExample } from '../../../infra/utils/swagger-annotations'
 import { ListTutorialsResponse } from '../dtos/list-tutorials-response'
 import { CreateTutorialsParamsInputSchema } from '../dtos/create-tutorials-params-input-Schema'
 import { CreateTutorialsUseCase } from '../use-cases/create-tutorials'

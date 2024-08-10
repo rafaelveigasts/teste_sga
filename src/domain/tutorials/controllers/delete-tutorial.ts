@@ -4,7 +4,6 @@ import {
   Controller,
   Delete,
   InternalServerErrorException,
-  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common'
 import {
@@ -13,14 +12,10 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger'
-import { TemplatedApiException } from '@/core/decorators/templated-api-exception'
-import { ValidationRequestException } from '@/core/errors/validation-request-exception'
-import { validationExceptionExample } from '@/infra/utils/swagger-annotations'
+import { TemplatedApiException } from '../../../core/decorators/templated-api-exception'
+import { ValidationRequestException } from '../../../core/errors/validation-request-exception'
+import { validationExceptionExample } from '../../../infra/utils/swagger-annotations'
 import { ListTutorialsResponse } from '../dtos/list-tutorials-response'
-import { CreateTutorialsUseCase } from '../use-cases/create-tutorials'
-import { Tutorials } from '../entities/tutorials'
-import { PatchTutorialsParamsInputSchema } from '../dtos/patch-tutorials-params-input-Schema'
-import { PatchTutorialsUseCase } from '../use-cases/patch-tutorials'
 import { DeleteTutorialsParamsInputSchema } from '../dtos/delete-tutorials-params-input-Schema'
 import { DeleteTutorialsUseCase } from '../use-cases/delete-tutorial'
 

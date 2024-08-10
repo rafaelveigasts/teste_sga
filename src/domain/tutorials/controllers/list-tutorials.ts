@@ -14,13 +14,14 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger'
-import { TemplatedApiException } from '@/core/decorators/templated-api-exception'
-import { ValidationRequestException } from '@/core/errors/validation-request-exception'
-import { validationExceptionExample } from '@/infra/utils/swagger-annotations'
+import { TemplatedApiException } from '../../../core/decorators/templated-api-exception'
+import { ValidationRequestException } from '../../..//core/errors/validation-request-exception'
+import { validationExceptionExample } from '../../../infra/utils/swagger-annotations'
 import { ListTutorialsResponse } from '../dtos/list-tutorials-response'
 import { ListTutorialsUseCase } from '../use-cases/list-tutorials'
 import { ListTutorialsParamsQuerySchema } from '../dtos/list-tutorials-params-query-Schema'
 import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager'
+import { Tutorials } from '../entities/tutorials'
 
 @UseInterceptors(CacheInterceptor)
 @Controller('/tutorials')
@@ -41,7 +42,7 @@ export class ListTutorialsController {
   ])
   async handle(
     @Query() query: ListTutorialsParamsQuerySchema,
-  ): Promise<ListTutorialsResponse[]> {
+  ): Promise<Tutorials[]> {
     const tutorials = await this.listTutorialsUseCase.execute({
       page: query.page,
       quantity: query.quantity,

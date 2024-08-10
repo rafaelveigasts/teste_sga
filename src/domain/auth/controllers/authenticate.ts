@@ -8,8 +8,8 @@ import {
 } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
 
-import { TemplatedApiException } from '@/core/decorators/templated-api-exception'
-import { ValidationRequestException } from '@/core/errors/validation-request-exception'
+import { TemplatedApiException } from '../../../core/decorators/templated-api-exception'
+import { ValidationRequestException } from '../../..//core/errors/validation-request-exception'
 
 import {
   AuthenticateUserBodyRequest,
@@ -17,8 +17,8 @@ import {
 } from '../dtos/user-autentication-dto'
 import { AuthenticateUserUseCase } from '../use-cases/authenticate-user'
 import { WrongCredentialsError } from '../use-cases/erros/wrong-credentials-error'
-import { Public } from '@/core/decorators/public'
-import { validationExceptionExample } from '@/infra/utils/swagger-annotations'
+import { Public } from '../../../core/decorators/public'
+import { validationExceptionExample } from '../../../infra/utils/swagger-annotations'
 
 @Public()
 @Controller('/user/login')

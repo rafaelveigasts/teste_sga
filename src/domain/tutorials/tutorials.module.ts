@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { ListTutorialsController } from './controllers/list-tutorials'
 import { ListTutorialsUseCase } from './use-cases/list-tutorials'
-import { DatabaseModule } from '@/infra/database/database.module'
+import { DatabaseModule } from '../../infra/database/database.module'
 import { CreateTutorialsController } from './controllers/create-tutorial'
 import { CreateTutorialsUseCase } from './use-cases/create-tutorials'
 import { PatchTutorialsController } from './controllers/patch-tutorial'

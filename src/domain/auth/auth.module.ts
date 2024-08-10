@@ -4,9 +4,9 @@ import { APP_GUARD } from '@nestjs/core'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
 
-import { DatabaseModule } from '@/infra/database/database.module'
-import { EnvModule } from '@/infra/env/env.module'
-import { EnvService } from '@/infra/env/env.service'
+import { DatabaseModule } from '../../infra/database/database.module'
+import { EnvModule } from '../../infra/env/env.module'
+import { EnvService } from '../..//infra/env/env.service'
 
 import { AuthenticateUserUseCaseController } from './controllers/authenticate'
 import { JwtAuthGuard } from './jwt/jwt-auth.guard'
