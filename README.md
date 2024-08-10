@@ -94,10 +94,3 @@ function process(items: number[]) {
 a função inicialmente tem complexidade O(n) pq mesmo que seja percorrida 2x a contante 2 é ignorada na notação BigO.
 
 e se quiser melhorar o exemplo chama o console executando a função com os parametros já adicionados.
-
-## License
-
-Nest is [MIT licensed](LICENSE).
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
