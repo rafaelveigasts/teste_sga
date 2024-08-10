@@ -2,10 +2,10 @@ import { Inject, Injectable } from '@nestjs/common'
 
 import { Either, left, right } from '../../../core/either'
 import { TutorialsRepository } from '../repositories/tutorials-repository'
-import { TutorialsNotFoundError } from './errors/tutorials-not-found'
 import { Tutorials } from '../entities/tutorials'
 import { CACHE_MANAGER } from '@nestjs/cache-manager'
 import { Cache } from 'cache-manager'
+import { TutorialsNotFoundError } from './errors/tutorials-not-found'
 
 type ListTutorialsUseCaseResponse = Either<TutorialsNotFoundError, Tutorials[]>
 
