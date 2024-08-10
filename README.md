@@ -41,7 +41,7 @@ NODE_ENV=development
 DATABASE_URL="postgresql://postgres:postgres@postgres:5432/test_nest_sga?schema=public"
 JWT_PUBLIC_KEY="teste_nest_sga"
 JWT_PRIVATE_KEY="teste_nest_sga"
-REDIS_URL="redis://redis:6378"
+
 
 ```
 
