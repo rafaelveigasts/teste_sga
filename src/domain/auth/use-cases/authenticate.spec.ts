@@ -3,6 +3,7 @@ import { AuthenticateUserUseCase } from './authenticate-user'
 import { JwtService } from '@nestjs/jwt'
 import { InMemoryUserRepository } from '../../../../test/mock/repositories/in-memory-user-repository'
 import { UserRepository } from '../../users/repositories/user-repository'
+import { faker } from '@faker-js/faker'
 
 let sut: AuthenticateUserUseCase
 let jwtService: JwtService
@@ -33,5 +34,19 @@ describe('[Auth] AuthenticateUseCase', () => {
 
   it('should be defined', () => {
     expect(sut).toBeDefined()
+    expect(jwtService).toBeDefined()
+  })
+
+  it('should be able to authenticate a user', async () => {
+    const userData = {
+      name: faker.person.firstName(),
+      password: faker.internet.password(),
+    }
+
+    const response = await sut.execute(userData)
+
+    expect(response.isRight()).toBeTruthy()
+    expect(response.value).toBeInstanceOf(Object)
+    expect(inMemoryUserRepository.users[0].name).toBe(userData.name)
   })
 })
