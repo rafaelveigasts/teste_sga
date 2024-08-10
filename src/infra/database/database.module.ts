@@ -4,13 +4,10 @@ import { UserRepository } from '../../domain/users/repositories/user-repository'
 import { PrismaUsersRepository } from './repositories/users/prisma-users-repository'
 import { TutorialsRepository } from '../../domain/tutorials/repositories/tutorials-repository'
 import { PrismaTutorialsRepository } from './repositories/tutorials/prisma-tutorials-repository'
-// import { RedisRepository } from './repositories/cache/redis-repository'
-import { RedisService } from '../config/redis/redis'
 
 @Module({
   providers: [
     PrismaService,
-    RedisService,
     {
       provide: UserRepository,
       useClass: PrismaUsersRepository,
