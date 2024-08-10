@@ -2,10 +2,7 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+<p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
@@ -24,7 +21,11 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Repositório de teste técnico para cargo de desenvolvedor backend.
+
+## Abordagem
+
+Foi utilizado abordagem de DDD(domain driven design) para redução da complexidade ao aplicar um sistema com subdomínios e contextos delimitados assim facilitando o gerenciamento de mudanças, maior manutenabilidade já que o código está organizado em pastas bem definidas, e a escalabilidade pois fica mais fácil de adaptar novas funcionalidades.
 
 ## Installation
 
@@ -35,11 +36,11 @@ $ npm install
 ## Running the app
 
 ```bash
-# development
-$ npm run start
+# initialize containers
+$ docker compose up -d
 
 # watch mode
-$ npm run start:dev
+$ npm run start:dev (it will populate the database with 30 tutorials)
 
 # production mode
 $ npm run start:prod
@@ -58,16 +59,34 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Code Review
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- primeira linha, modelagem de dados do parametro item não deve ser any seguinto o exemplo deveria ser number[].
+- segunda linha trocar var por let pois var pode vazar o escopo.
+- se for utilizar o loop for, iniciar com let para evitar vazamento de escopo.
+- a função percorre 2x a lista para somar os valores, fica melhor e mais legível nesse caso utilizar reduce mantendo a complexidade de tempo em (O)n conforme abaixo:
 
-## Stay in touch
+```typescript
+function process(items: number[]) {
+  const total = items.reduce((acc, item) => {
+    if (item > 0) {
+      console.log(item + ' is a positive number')
+      return acc + item
+    }
+    return acc
+  }, 0)
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+  return total
+}
+```
+
+a função inicialmente tem complexidade O(n) pq mesmo que seja percorrida 2x a contante 2 é ignorada na notação BigO.
+
+e se quiser melhorar o exemplo chama o console executando a função com os parametros já adicionados.
 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
