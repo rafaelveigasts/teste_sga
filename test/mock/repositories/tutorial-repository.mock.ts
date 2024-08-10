@@ -1,5 +1,5 @@
-import { TutorialsRepository } from '../../src/domain//tutorials/repositories/tutorials-repository'
-import { tutorialsMockResponse } from './tutorials-list.mock'
+import { TutorialsRepository } from '../../../src/domain/tutorials/repositories/tutorials-repository'
+import { tutorialsMockResponse } from '../tutorials-list.mock'
 
 export const tutorialsRepositoryMock = {
   provide: TutorialsRepository,
