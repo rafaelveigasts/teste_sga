@@ -33,6 +33,17 @@ Foi utilizado abordagem de DDD(domain driven design) para redução da complexid
 $ npm install
 ```
 
+## .Env
+
+```
+PORT=3333
+NODE_ENV=development
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/teste_nest_sga?schema=public"
+JWT_PUBLIC_KEY="teste_nest_sga"
+JWT_PRIVATE_KEY="teste_nest_sga"
+
+```
+
 ## Running the app
 
 ```bash
