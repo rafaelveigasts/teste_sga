@@ -86,12 +86,7 @@ describe('[TUTORIALS USE CASE - UNIT TEST]', () => {
     })
 
     it('should be able to list all tutorials', async () => {
-      // const tutorials: Tutorials = {
-      //   title: 'title',
-      // }
-
       jest.spyOn(tutorialsRepository, 'list')
-      // .mockImplementation(async () => tutorials)
 
       const response = await listTutorialsUseCase.execute({
         page: 0,
@@ -99,7 +94,6 @@ describe('[TUTORIALS USE CASE - UNIT TEST]', () => {
       })
 
       expect(response.isRight()).toBeTruthy()
-      // expect(response.value).toEqual(tutorials)
     })
   })
   describe('DeleteTutorialsUseCase', () => {
