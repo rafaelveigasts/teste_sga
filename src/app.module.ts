@@ -16,17 +16,14 @@ import { APP_PIPE, APP_INTERCEPTOR, Reflector, APP_FILTER } from '@nestjs/core'
 import { ValidationRequestException } from './core/errors/validation-request-exception'
 import { TutorialsModule } from './domain/tutorials/tutorials.module'
 import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager'
-import type { RedisClientOptions } from 'redis'
-import * as redisStore from 'cache-manager-redis-store'
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     LoggerModule.forRoot(pinoConfig),
-    CacheModule.register<RedisClientOptions>({
-      store: redisStore as CacheModule['register'][0]['store'],
+    CacheModule.register({
       isGlobal: true,
-      url: 'redis://redis:6379',
+      ttl: 60 * 60 * 24,
     }),
     EnvModule,
     DatabaseModule,
