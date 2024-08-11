@@ -5,6 +5,7 @@ import { Either, right } from '../../../core/either'
 import { UserRepository } from '../../users/repositories/user-repository'
 import { WrongCredentialsError } from './erros/wrong-credentials-error'
 import { UserPayload } from '../dtos/user-payload'
+import { UserNotFoundError } from '@/domain/users/use-cases/errors/user-not-found'
 
 type AuthenticateUserUseCaseRequest = {
   name: string
@@ -29,10 +30,10 @@ export class AuthenticateUserUseCase {
     name,
     password,
   }: AuthenticateUserUseCaseRequest): Promise<AuthenticateUserUseCaseResponse> {
-    let userOnDatabase = await this.usersRepository.findByUsername(name)
+    const userOnDatabase = await this.usersRepository.findByUsername(name)
 
     if (!userOnDatabase) {
-      userOnDatabase = await this.usersRepository.create(name, password)
+      throw new UserNotFoundError()
     }
 
     const payload: UserPayload = {

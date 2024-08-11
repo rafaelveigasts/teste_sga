@@ -17,6 +17,14 @@ async function run() {
       }),
     )
   }
+
+  await prisma.user.create({
+    data: {
+      name: 'teste',
+      password: 'teste',
+    },
+  })
+
   await Promise.all(promises)
 }
 
